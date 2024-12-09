@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+</head>
+<style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+     body {
+            text-align: center;
+            background-color: #000;
+            color: white;  
+        }
+        h1 {
+            color: yellow;
+            margin-bottom: 30px;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .box.user {
+            background-color: green;
+            color: white;
+        }
+        .box.computer {
+            background-color: red;
+            color: white;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ff9800;
+        }
+        #game-info {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #next-round-btn {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: yellow;
+            color: black;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+        }
+        #next-round-btn:disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+        .input-container h1{
+          color: black;
+          padding: 50px;
+          margin: 30px;
+          box-shadow: 0 8px 20px red;
+        }
+        .input-container {
+            margin: 30px;
+            padding: 2px;
+          text-align: center;
+          background-color: antiquewhite;
+          
+        }
+        input{
+            padding: 20px;
+            margin: 30px;
+        }
+        input, select, button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        #username {
+            width: 200px;
+            margin-right: 10px;
+        }
+        #symbol {
+            margin-right: 10px;
+        }
+        #game-info p, #message {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+        header {
+        width: 100%;
+        background-color: rgb(14, 6, 40);
+       box-shadow: 0 8px 70px rgb(255, 0, 0);
+       margin: 1px;
+
+
+
+    }
+    .m {
+        padding: 20px;
+        margin: auto;
+        display: flex;
+    }
+    marquee h1 {
+        color: whitesmoke;
+        width: 180px;
+        padding: 0px;
+        margin: 0;
+
+    }
+    h1:hover {  
+        box-shadow: 0 8px 70px rgb(0, 255, 229);
+    }
+    img {
+        width: 90px;
+        border-radius: 95px;
+        border: 2px solid dimgray;
+    }
+    .f {
+        text-align: center;
+        padding: 30px;
+        background-color: black;
+
+    }
+    h2 {
+        font-size: 0 10cm;
+        padding: 30px;
+        box-shadow: 0 8px 20px rgb(0, 0, 0.4);
+        
+    }
+    h2:hover {
+        color: rgb(29, 213, 72);
+        box-shadow: 0 15px 30px rgb(19, 191, 111);
+
+      
+    }
+    p {
+        padding: 30px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+    }
+    
+   
+</style>
+<body>
+    <header>
+        <div class="m">
+            <marquee behavior="" direction="right"><h1>Tic-Tac-Toe</h1></marquee>
+            <img src="img/images.jpg">
+        </div>
+    </header>
+    <div class="f">
+        <h2>Welcome to Tic-Tac-Toe</h2>
+        <p>"Tic-Tac-Toe Game" is a simple yet engaging two-player game designed to bring a fun and competitive experience. In this digital version, players can choose between two symbols, 'X' or 'O,' and take turns to mark their symbol on a 3x3 grid. The goal is to get three symbols in a row, either horizontally, vertically, or diagonally, before your opponent does.
+
+            With an easy-to-use interface, vibrant colors, and smooth gameplay, this game ensures a fun time for all ages. The game also includes a scoring system to track rounds, showing how many times each player or the computer wins. Challenge yourself or play against the computer to test your strategy skills in this timeless classic!</p>
+    </div>
+    <div class="input-container">
+
+    <h1>Tic-Tac-Toe: User vs Computer</h1>
+
+        <input type="text" id="username" placeholder="Enter your name" />
+        <select id="symbol">
+            <option value="X">X</option>
+            <option value="O">O</option>
+        </select>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="game-info" style="display:none;">
+        <p>Round: <span id="round">1</span></p>
+        <p>User Wins: <span id="user-wins">0</span></p>
+        <p>Computer Wins: <span id="computer-wins">0</span></p>
+        <h1 id="message"></h1>
+    </div>
+
+    <div id="game-board" style="display:none;">
+       
+        <button class="box" data-index="0"></button>
+        <button class="box" data-index="1"></button>
+        <button class="box" data-index="2"></button>
+        <button class="box" data-index="3"></button>
+        <button class="box" data-index="4"></button>
+        <button class="box" data-index="5"></button>
+        <button class="box" data-index="6"></button>
+        <button class="box" data-index="7"></button>
+        <button class="box" data-index="8"></button>
+        <button id="next-round-btn" onclick="nextRound()">Next Round</button>
+
+    </div>
+
+    <p id="message"></p>
+
+    <script>
+        let currentPlayer = 'user';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let round = 1;
+        let userWins = 0;
+        let computerWins = 0;
+        let userSymbol = 'X';
+        let computerSymbol = 'O';
+        let username = '';
+        let gameActive = true;
+
+        const winningCombinations = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        const boxes = document.querySelectorAll('.box');
+        const levelDisplay = document.getElementById('round');
+        const userWinsDisplay = document.getElementById('user-wins');
+        const computerWinsDisplay = document.getElementById('computer-wins');
+        const messageDisplay = document.getElementById('message');
+        const gameBoardElement = document.getElementById('game-board');
+        const gameInfoElement = document.getElementById('game-info');
+        const symbolSelect = document.getElementById('symbol');
+        const nextRoundButton = document.getElementById('next-round-btn');
+        const usernameInput = document.getElementById('username');
+
+        function startGame() {
+            username = usernameInput.value.trim();
+            if (!username) {
+                alert("Please enter your name!");
+                return;
+            }
+            userSymbol = symbolSelect.value;
+            computerSymbol = userSymbol === 'X' ? 'O' : 'X';
+            gameInfoElement.style.display = 'block';
+            gameBoardElement.style.display = 'grid';
+            messageDisplay.textContent = `You are playing as ${userSymbol}.`;
+            resetGame();
+        }
+
+        function handleBoxClick(event) {
+            if (!gameActive) return;
+            const box = event.target;
+            const index = box.getAttribute('data-index');
+            
+            if (gameBoard[index] === '' && currentPlayer === 'user') {
+                gameBoard[index] = userSymbol;
+                box.textContent = userSymbol;
+                box.classList.add('user');
+                currentPlayer = 'computer';
+                checkWin(userSymbol);
+                if (gameActive) setTimeout(computerMove, 500);
+            }
+        }
+
+        function computerMove() {
+            if (!gameActive) return;
+
+            // Random, Greedy, or Minimax with Randomization
+            let strategy = Math.floor(Math.random() * 3);
+
+            if (strategy === 0) {
+                randomMove();
+            } else if (strategy === 1) {
+                greedyMove();
+            } else {
+                minimaxMove();
+            }
+        }
+
+        function randomMove() {
+            let availableMoves = getAvailableMoves();
+            let randomMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            gameBoard[randomMove] = computerSymbol;
+            boxes[randomMove].textContent = computerSymbol;
+            boxes[randomMove].classList.add('computer');
+            currentPlayer = 'user';
+            checkWin(computerSymbol);
+        }
+
+        function greedyMove() {
+            let bestMove = getBestGreedyMove();
+            gameBoard[bestMove] = computerSymbol;
+            boxes[bestMove].textContent = computerSymbol;
+            boxes[bestMove].classList.add('computer');
+            currentPlayer = 'user';
+            checkWin(computerSymbol);
+        }
+
+        function minimaxMove() {
+            let bestMove = minimax(gameBoard, computerSymbol);
+            gameBoard[bestMove] = computerSymbol;
+            boxes[bestMove].textContent = computerSymbol;
+            boxes[bestMove].classList.add('computer');
+            currentPlayer = 'user';
+            checkWin(computerSymbol);
+        }
+
+        function getAvailableMoves() {
+            return gameBoard.reduce((acc, curr, index) => {
+                if (curr === '') acc.push(index);
+                return acc;
+            }, []);
+        }
+
+        function getBestGreedyMove() {
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    gameBoard[i] = computerSymbol;
+                    if (checkWinner(gameBoard, computerSymbol)) {
+                        return i;
+                    }
+                    gameBoard[i] = '';
+                }
+            }
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    gameBoard[i] = userSymbol;
+                    if (checkWinner(gameBoard, userSymbol)) {
+                        return i;
+                    }
+                    gameBoard[i] = '';
+                }
+            }
+            return getAvailableMoves()[Math.floor(Math.random() * getAvailableMoves().length)];
+        }
+
+        function minimax(board, player) {
+            const availableMoves = getAvailableMoves();
+            if (checkWinner(board, userSymbol)) return -1;
+            if (checkWinner(board, computerSymbol)) return 1;
+            if (availableMoves.length === 0) return 0;
+
+            let bestMove;
+            let bestValue = (player === computerSymbol) ? -Infinity : Infinity;
+
+            availableMoves.forEach(move => {
+                board[move] = player;
+                let moveValue = minimax(board, (player === computerSymbol) ? userSymbol : computerSymbol);
+                board[move] = '';
+
+                if (player === computerSymbol && moveValue > bestValue) {
+                    bestValue = moveValue;
+                    bestMove = move;
+                } else if (player === userSymbol && moveValue < bestValue) {
+                    bestValue = moveValue;
+                    bestMove = move;
+                }
+            });
+
+            return bestMove;
+        }
+
+        function checkWinner(board, player) {
+            return winningCombinations.some(combination => {
+                return combination.every(index => board[index] === player);
+            });
+        }
+
+        function checkWin(player) {
+            if (checkWinner(gameBoard, player)) {
+                gameActive = false;
+                messageDisplay.textContent = `${player === userSymbol ? 'You' : 'Computer 😛😆'} win! 🥳`;
+                updateScore(player);
+                nextRoundButton.style.display = 'block';
+            } else if (getAvailableMoves().length === 0) {
+                gameActive = false;
+                messageDisplay.textContent = "It's a tie! 😞";
+                nextRoundButton.style.display = 'block';
+            }
+        }
+
+        function updateScore(player) {
+            if (player === userSymbol) {
+                userWins++;
+                userWinsDisplay.textContent = userWins;
+            } else {
+                computerWins++;
+                computerWinsDisplay.textContent = computerWins;
+            }
+        }
+
+        function nextRound() {
+            round++;
+            levelDisplay.textContent = round;
+            resetGame();
+            messageDisplay.textContent = '';
+            nextRoundButton.style.display = 'none';
+        }
+
+        function resetGame() {
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'user';
+            gameActive = true;
+            boxes.forEach(box => {
+                box.textContent = '';
+                box.classList.remove('user', 'computer');
+            });
+        }
+
+        boxes.forEach(box => {
+            box.addEventListener('click', handleBoxClick);
+        });
+    </script>
+</body>
+</html>

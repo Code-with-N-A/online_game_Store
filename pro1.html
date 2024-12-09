@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Love Calculator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        background-color: #f4f4f4;
+      }
+      header {
+        text-align: center;
+        padding: 10px;
+        margin: 10px;
+        box-sizing: border-box;
+        border: 3px solid black;
+        background-color: bisque;
+      }
+
+      .f {
+        border: solid tomato;
+        background-color: aqua;
+        padding: 70px;
+        margin: 10px;
+        border-style: double;
+        text-align: center;
+      }
+
+      h1 {
+        color: red;
+        padding-bottom: 10px;
+      }
+
+      span {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      input {
+        padding: 9px;
+        border: 2px solid black;
+        margin: 10px;
+        border-radius: 8px;
+        background-color: palegreen;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        width: 80%;
+      }
+      button {
+        padding: 10px 20px;
+        border: 2px solid royalblue;
+        font-size: larger;
+        background-color: rgba(251, 20, 224, 0.579);
+        border-radius: 10px;
+        color: darkmagenta;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: chartreuse;
+        color: coral;
+        border-color: magenta;
+      }
+      h2 {
+        padding: 10px;
+        margin: 10px 0;
+        background-color: black;
+        color: magenta;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+      .he {
+        background-color: black;
+        padding: 20px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .he img {
+        width: 90px;
+        border: 3px solid rgba(69, 242, 239, 0.839);
+        border-radius: 95px;
+      }
+      footer {
+        background-color: black;
+        padding: 50px;
+        text-align: center;
+        color: whitesmoke;
+      }
+      footer .icons {
+        font-size: 24px;
+        margin-top: 10px;
+      }
+      footer .icons i {
+        padding: 0 10px;
+        color: red;
+      }
+      .d {
+        color: whitesmoke;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      .relationship-type {
+        margin: 20px;
+      }
+      .relationship-type label {
+        font-size: larger;
+      }
+      .relationship-type select {
+        padding: 8px;
+        margin-top: 10px;
+        border-radius: 8px;
+        background-color: lightyellow;
+        border: 2px solid darkgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="he">
+      <marquee behavior="alternate" direction="right">
+        <h1>-: ❤ Love Project 😘 ❤ :-</h1>
+      </marquee>
+      <img src="img/Untitled.jpg" />
+    </div>
+
+    <header class="hed">
+      <div class="f">
+        <div class="dity">
+          <h1>Love Connection ❤</h1>
+          <span>
+            Curious to find out the love compatibility between two people? Enter
+            their names, select the relationship type, and let the love
+            calculator work its magic! Whether it's a sibling bond, romantic
+            love, or even a family relationship, this fun project will give you
+            a love percentage in no time!
+          </span>
+        </div>
+        <div class="in">
+          <input
+            type="text"
+            id="b"
+            placeholder="Enter 1st Person's Name"
+            required
+          /><br />
+          <input
+            type="text"
+            id="g"
+            placeholder="Enter 2nd Person's Name"
+            required
+          /><br />
+          <div class="relationship-type">
+            <label for="relationship">Select Relationship Type:</label><br />
+            <select id="relationship">
+              <option value="bf-gf">Boyfriend-Girlfriend</option>
+              <option value="brother-sister">Brother-Sister</option>
+              <option value="mom-dad">Mom-Dad</option>
+              <option value="friends">Friends</option>
+              <option value="grandparents">Grandparents</option>
+              <option value="colleagues">Colleagues</option>
+              <option value="neighbors">Neighbors</option>
+            </select>
+          </div>
+          <button onclick="calculateLove()">Submit</button>
+          <h2 id="re">Your Love Percentage</h2>
+          <script>
+            function calculateLove() {
+              let name1 = document.getElementById("b").value.trim();
+              let name2 = document.getElementById("g").value.trim();
+              let relationship = document.getElementById("relationship").value;
+
+              // Check if names are entered
+              if (name1 === "" || name2 === "") {
+                alert("Please enter both names 😊");
+                return;
+              }
+
+              // Check if there's already a stored result
+              let key = name1 + "-" + name2 + "-" + relationship;
+              let storedResult = localStorage.getItem(key);
+
+              if (storedResult) {
+                // Display the stored percentage
+                document.getElementById("re").innerHTML =
+                  name1 +
+                  " and " +
+                  name2 +
+                  " have a " +
+                  storedResult +
+                  "% match in the '" +
+                  relationship.replace("-", " ") +
+                  "' category!";
+              } else {
+                // Generate a random percentage and store it
+                let lovePercentage = Math.floor(Math.random() * 101);
+                localStorage.setItem(key, lovePercentage);
+
+                document.getElementById("re").innerHTML =
+                  name1 +
+                  " and " +
+                  name2 +
+                  " have a " +
+                  lovePercentage +
+                  "% match in the '" +
+                  relationship.replace("-", " ") +
+                  "' category!";
+              }
+            }
+          </script>
+        </div>
+      </div>
+    </header>
+
+    <footer>
+      <samp class="d">
+        Thank you for using the Love Calculator! Remember, love isn't just about
+        numbers—it's about the bond you share!
+      </samp>
+      <div class="icons">
+        <i class="fas fa-heart"></i>
+        <i class="fas fa-kiss-wink-heart"></i>
+        <i class="fas fa-heartbeat"></i>
+        <i class="fas fa-cupid"></i>
+        <i class="fas fa-hand-holding-heart"></i>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Games - Gaming Project</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #121212;
+        color: #fff;
+      }
+      header {
+        background-color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+      }
+      .logo img {
+        width: 80px;
+        border-radius: 50%;
+        border: 3px solid navajowhite;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 20px;
+      }
+      nav ul li a:hover {
+        color: cyan;
+        border-bottom: 2px solid cyan;
+      }
+
+      /* Game Section */
+      .games-section {
+        padding: 60px 20px;
+        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .games-section h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+
+      .game-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+      }
+
+      .game-card {
+        background-color: #333;
+        width: 300px;
+        border-radius: 10px;
+        padding: 20px;
+        transition: transform 0.3s ease-in-out;
+      }
+      .game-card:hover {
+        transform: scale(1.05);
+      }
+
+      .game-card img {
+        width: 100%;
+        height: 180px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+
+      .game-card h3 {
+        font-size: 24px;
+        margin: 15px 0;
+        color: cyan;
+      }
+
+      .game-card p {
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 15px;
+      }
+
+      .game-card button {
+        padding: 10px 20px;
+        background-color: cyan;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .game-card button:hover {
+        background-color: #00bcd4;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #000;
+        color: whitesmoke;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      footer p {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      footer .social-icons {
+        margin-top: 20px;
+      }
+      footer .social-icons a {
+        color: #fff;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 24px;
+      }
+      footer .social-icons a:hover {
+        color: cyan;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="img/IMG_20241103_142348_375.jpg" alt="logo" />
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Game Section -->
+    <section class="games-section">
+      <h1>Our Games</h1>
+      <div class="game-cards">
+        <!-- Game 1 -->
+        <div class="game-card">
+          <img src="img/Untitled.jpg" alt="Game 1" />
+          <h3>Love  test Game</h3>
+          <p>
+            Gem reveals the hidden love between two hearts, showing the exact percentage of the connection they share. It’s not just numbers, but a reflection of the bond and feelings that lie between them."
+          </p>
+          <button onclick="window.location.href='pro1.html'">Start Game</button>
+        </div>
+
+        <!-- Game 2 -->
+        <div class="game-card">
+          <img src="img/images.jpg" alt="Game 2" />
+          <h3>tic toh toe</h3>
+          <p>
+            "Tic-Tac-Toe is more than just a game—it’s a quick battle of wits where strategy meets fun. Test your skills and outsmart your opponent by being the first to align your X's or O's in a row!"
+          </p>
+          <button onclick="window.location.href='pro2.html'">Start Game</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2024 Gaming Project. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="#">🌐</a>
+        <a href="#">📱</a>
+        <a href="#">✉️</a>
+      </div>
+    </footer>
+  </body>
+</html>
